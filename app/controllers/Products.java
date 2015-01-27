@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Product;
+import models.StockItem;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -36,7 +37,14 @@ public class Products extends Controller {
             return badRequest(details.render(boundForm));
         }
         Product product = boundForm.get();
+
+        StockItem stockItem = new StockItem();
+        stockItem.product = product;
+        stockItem.quantity = 0L;
+
         product.save();
+        stockItem.save();
+
         flash("success", String.format("Successfully added product %s", product));
         return redirect(routes.Products.list());
     }
@@ -46,7 +54,7 @@ public class Products extends Controller {
         if(product == null) {
             return notFound(String.format("Product %s does not exists.", ean));
         }
-        Product.remove(product);
+        product.delete();
         return redirect(routes.Products.list());
     }
 }

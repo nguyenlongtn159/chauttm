@@ -22,6 +22,10 @@ public class Product extends Model
     public String name;
 
     public String description;
+
+    @OneToMany(mappedBy="product")
+    public List<StockItem> stockItems;
+
     public byte[] picture;
     public List<Tag> tags;
 
@@ -49,10 +53,6 @@ public class Product extends Model
 
     public static List<Product> findByName(String term) {
         return find.where().eq("name", term).findList();
-    }
-
-    public static boolean remove(Product product) {
-        return products.remove(product);
     }
 
     private static List<Product> products;
