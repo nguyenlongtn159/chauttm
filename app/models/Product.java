@@ -44,22 +44,11 @@ public class Product extends Model
     }
 
     public static Product findByEan(String ean) {
-        for (Product candidate : products) {
-            if (candidate.ean.equals(ean)) {
-                return candidate;
-            }
-        }
-        return null;
+        return find.where().eq("ean", ean).findUnique();
     }
 
     public static List<Product> findByName(String term) {
-        final List<Product> results = new ArrayList<Product>();
-        for (Product candidate : products) {
-            if (candidate.name.toLowerCase().contains(term.toLowerCase())) {
-                results.add(candidate);
-            }
-        }
-        return results;
+        return find.where().eq("name", term).findList();
     }
 
     public static boolean remove(Product product) {
