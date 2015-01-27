@@ -1,15 +1,20 @@
 package models;
 
 import play.data.validation.Constraints;
-
+import play.db.ebean.Model;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by dse on 1/20/15.
  */
-public class Product
+@Entity
+public class Product extends Model
 {
+    @Id
+    public Long id;
+
     @Constraints.Required
     public String ean;
 
@@ -17,6 +22,12 @@ public class Product
     public String name;
 
     public String description;
+    public byte[] picture;
+    public List<Tag> tags;
+
+    public static Finder<Long,Product> find = new Finder<Long,Product>(
+            Long.class, Product.class
+    );
 
     public Product() {}
     public Product(String ean, String name, String description) {
@@ -29,7 +40,7 @@ public class Product
     }
 
     public static List<Product> findAll() {
-        return new ArrayList<Product>(products);
+        return find.all();
     }
 
     public static Product findByEan(String ean) {
@@ -54,12 +65,6 @@ public class Product
     public static boolean remove(Product product) {
         return products.remove(product);
     }
-
-    public void save() {
-        products.remove(findByEan(this.ean));
-        products.add(this);
-    }
-
 
     private static List<Product> products;
     static {
