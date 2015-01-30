@@ -24,14 +24,14 @@ public class Products extends Controller {
     public static Result newProduct() {
         return ok(details.render(productForm));
     }
-    public static Result details(String ean) {
-        final Product product = Product.findByEan(ean);
+    public static Result details(Product product) {
         if (product == null) {
-            return notFound(String.format("Product %s does not exist.", ean));
+            return notFound(String.format("Product %s does not exist.", product.ean));
         }
         Form<Product> filledForm = productForm.fill(product);
         return ok(details.render(filledForm));
     }
+
     public static Result save() {
         Form<Product> boundForm = productForm.bindFromRequest();
         if (boundForm.hasErrors()) {

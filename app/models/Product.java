@@ -1,7 +1,10 @@
 package models;
 
+import play.mvc.PathBindable;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
+import scala.util.Either;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +13,7 @@ import java.util.List;
  * Created by dse on 1/20/15.
  */
 @Entity
-public class Product extends Model
+public class Product extends Model implements PathBindable<Product>
 {
     @Id
     public Long id;
@@ -70,5 +73,20 @@ public class Product extends Model
                 "Paperclips description 4"));
         products.add(new Product("5555555555555", "Paperclips 5",
                 "Paperclips description 5"));
+    }
+
+    @Override
+    public Product bind(String key, String value) {
+        return findByEan(value);
+    }
+
+    @Override
+    public String unbind(String key) {
+        return ean;
+    }
+
+    @Override
+    public String javascriptUnbind() {
+        return ean;
     }
 }
