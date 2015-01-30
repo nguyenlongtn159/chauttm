@@ -2,12 +2,14 @@ package controllers;
 
 import models.Product;
 import models.StockItem;
+import models.Tag;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.products.details;
 import views.html.products.list;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,12 +39,18 @@ public class Products extends Controller {
             return badRequest(details.render(boundForm));
         }
         Product product = boundForm.get();
+        List<Tag> tags = new ArrayList<Tag>();
+        for (Tag tag : product.tags) {
+            if (tag.id != null) {
+                tags.add(Tag.findById(tag.id));
+            }
+        }
+        product.tags = tags;
+        product.save();
 
         StockItem stockItem = new StockItem();
         stockItem.product = product;
         stockItem.quantity = 0L;
-
-        product.save();
         stockItem.save();
 
         flash("success", String.format("Successfully added product %s", product));

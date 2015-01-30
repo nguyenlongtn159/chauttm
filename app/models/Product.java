@@ -27,6 +27,8 @@ public class Product extends Model
     public List<StockItem> stockItems;
 
     public byte[] picture;
+
+    @ManyToMany
     public List<Tag> tags;
 
     public static Finder<Long,Product> find = new Finder<Long,Product>(
