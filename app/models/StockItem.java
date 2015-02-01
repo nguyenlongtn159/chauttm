@@ -24,4 +24,12 @@ public class StockItem extends Model {
     public String toString() {
         return String.format("$d %s", quantity, product);
     }
+
+    public static StockItem findById(Long id) {
+        return StockItem.find.byId(id);
+    }
+
+    public static Finder<Long,StockItem> find = new Finder<Long,StockItem>(
+            Long.class, StockItem.class
+    );
 }

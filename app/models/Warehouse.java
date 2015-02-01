@@ -28,4 +28,12 @@ public class Warehouse extends Model {
     public String toString() {
         return name;
     }
+
+    public static Warehouse findById(Long id) {
+        return Warehouse.find.byId(id);
+    }
+
+    public static Finder<Long,Warehouse> find = new Finder<Long,Warehouse>(
+            Long.class, Warehouse.class
+    );
 }
