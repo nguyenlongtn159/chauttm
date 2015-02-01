@@ -21,9 +21,11 @@ public class Products extends Controller {
         List<Product> products = Product.findAll();
         return ok(list.render(products));
     }
+
     public static Result newProduct() {
         return ok(details.render(productForm));
     }
+
     public static Result details(Product product) {
         if (product == null) {
             return notFound(String.format("Product %s does not exist.", product.ean));
@@ -46,7 +48,12 @@ public class Products extends Controller {
             }
         }
         product.tags = tags;
-        product.save();
+
+        if (product.id == null) {
+            product.save();
+        } else {
+            product.update();
+        }
 
         StockItem stockItem = new StockItem();
         stockItem.product = product;
@@ -59,7 +66,7 @@ public class Products extends Controller {
 
     public static Result delete(String ean) {
         final Product product = Product.findByEan(ean);
-        if(product == null) {
+        if (product == null) {
             return notFound(String.format("Product %s does not exists.", ean));
         }
         product.delete();

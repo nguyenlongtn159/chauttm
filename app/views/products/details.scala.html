@@ -5,6 +5,7 @@
 @main("Product form") {
     <h1>Product form</h1>
     @helper.form(action = routes.Products.save()) {
+        <input type="hidden" value="@productForm("id").valueOr("")" name="id"/>
         <fieldset>
             <legend>Product (@productForm("name").valueOr("New"))</legend>
             @helper.inputText(productForm("ean"), '_label -> "EAN")
