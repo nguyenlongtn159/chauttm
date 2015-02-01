@@ -1,5 +1,6 @@
 package controllers;
 
+import com.avaje.ebean.Page;
 import models.Product;
 import models.StockItem;
 import models.Tag;
@@ -17,8 +18,8 @@ public class Products extends Controller {
 
     private static final Form<Product> productForm = Form.form(Product.class);
 
-    public static Result list() {
-        List<Product> products = Product.findAll();
+    public static Result list(Integer page) {
+        Page<Product> products = Product.find(page);
         return ok(list.render(products));
     }
 
@@ -61,7 +62,7 @@ public class Products extends Controller {
         stockItem.save();
 
         flash("success", String.format("Successfully added product %s", product));
-        return redirect(routes.Products.list());
+        return redirect(routes.Products.list(0));
     }
 
     public static Result delete(String ean) {
@@ -70,6 +71,6 @@ public class Products extends Controller {
             return notFound(String.format("Product %s does not exists.", ean));
         }
         product.delete();
-        return redirect(routes.Products.list());
+        return redirect(routes.Products.list(0));
     }
 }

@@ -10,3 +10,35 @@ tags:
     - !!models.Tag
         id:     3
         name:   plastic
+
+products:
+    - !!models.Product
+        id: 1
+        ean:  1
+        name: 11
+        description: 111 111 111
+    - !!models.Product
+        id: 2
+        ean:  2
+        name: 22
+        description: 2222222222
+    - !!models.Product
+        id: 3
+        ean:  3
+        name: 33
+        description: 111 111 111
+    - !!models.Product
+        id: 4
+        ean:  4
+        name: 11
+        description: 111 111 111
+    - !!models.Product
+        id: 5
+        ean:  5
+        name: 22
+        description: 2222222222
+    - !!models.Product
+        id: 6
+        ean:  6
+        name: 33
+        description: 111 111 111
