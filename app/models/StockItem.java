@@ -22,7 +22,8 @@ public class StockItem extends Model {
     public Long quantity;
 
     public String toString() {
-        return String.format("$d %s", quantity, product);
+        return String.format("StockItem %d - %d x product %s",
+                id, quantity, product == null ? null : product.id);
     }
 
     public static StockItem findById(Long id) {
