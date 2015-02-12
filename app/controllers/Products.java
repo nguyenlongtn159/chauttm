@@ -70,6 +70,9 @@ public class Products extends Controller {
         if (product == null) {
             return notFound(String.format("Product %s does not exists.", ean));
         }
+        for (StockItem stockItem : product.stockItems) {
+            stockItem.delete();
+        }
         product.delete();
         return redirect(routes.Products.list(0));
     }
