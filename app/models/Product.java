@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Page;
+import play.data.format.Formats;
 import play.mvc.PathBindable;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
@@ -8,6 +9,7 @@ import scala.util.Either;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +28,9 @@ public class Product extends Model implements PathBindable<Product>
     public String name;
 
     public String description;
+
+    //@Formats.DateTime(pattern = "yyyy-MM-dd")
+    public Date date;
 
     @OneToMany(mappedBy="product")
     public List<StockItem> stockItems;
@@ -52,6 +57,14 @@ public class Product extends Model implements PathBindable<Product>
     public static List<Product> findAll() {
         return find.all();
     }
+	
+	public void delete() {
+		for (Tag tag : tags) {
+			tag.products.remove(this);
+			tag.save();
+		}
+		super.delete();
+	}
 
     public static Page<Product> find(int page) {
         return find.where()

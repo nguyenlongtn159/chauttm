@@ -1,26 +1,38 @@
-@(title: String)(content: Html)
-
+@(title: String = "Paperclips!")(content: Html)
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>@title</title>
-        <link href="@routes.Assets.at("bootstrap/css/bootstrap.min.css")" rel="stylesheet" media="screen">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+        <link href="@routes.Assets.at("bootstrap/css/bootstrap.min.css")"
+        rel="stylesheet" media="screen">
+        <link href="@routes.Assets.at("stylesheets/main.css")"
+        rel="stylesheet" media="screen">
+        <link rel="shortcut icon" type="image/png"
+        href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"
+        type="text/javascript"></script>
     </head>
     <body>
-        @if(flash.containsKey("success")){
+        @navigation()
+
+    <div class="container">
+        @if(flash.containsKey("success")) {
             <div class="alert alert-success">
             @flash.get("success")
             </div>
         }
-        @if(flash.containsKey("error")){
+        @if(flash.containsKey("error")) {
             <div class="alert alert-error">
             @flash.get("error")
             </div>
         }
         @content
+    </div>
+
+    <nav class="nav navbar-default" style="margin-top : 20 px">
+        <div class="container">
+            <p>Copyright ©2012 paperclips.example.com</p>
+        </div>
+    </nav>
     </body>
 </html>
