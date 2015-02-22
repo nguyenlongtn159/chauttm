@@ -20,10 +20,11 @@ public class Application extends Controller {
         Form<Login> loginForm = form(Login.class).bindFromRequest();
         String email = loginForm.get().email;
         String password = loginForm.get().password;
-        if (UserAccount.authenticate(email, password) == null) {
-            return  forbidden("invalid password");
-        }
         session().clear();
+        if (UserAccount.authenticate(email, password) == null) {
+            flash("error", "Invalid email and/or password");
+            return redirect(routes.Application.login());
+        }
         session("email", email);
 
         return redirect(routes.Products.list(0));

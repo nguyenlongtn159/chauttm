@@ -25,12 +25,7 @@ public class UserAccount extends Model {
     }
 
     public static UserAccount authenticate(String email, String password) {
-        //should be
-        //return finder.where().eq("email", email).eq("password", password).findUnique();
-        if ("alice@example.com".equals(email) && "alice".equals(password))
-            return new UserAccount("alice@example.com", "alice");
-        else
-            return null;
+        return finder.where().eq("email", email).eq("password", password).findUnique();
     }
 
     public static Finder<Long, UserAccount> finder = new Finder<Long, UserAccount>(Long.class, UserAccount.class);

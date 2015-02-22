@@ -25,6 +25,10 @@ public class Global extends GlobalSettings {
             if (Ebean.find(Product.class).findRowCount() == 0) {
                 Ebean.save(all.get("products"));
             }
+
+            if (Ebean.find(UserAccount.class).findRowCount() == 0) {
+                Ebean.save(all.get("user_accounts"));
+            }
         }
     }
 

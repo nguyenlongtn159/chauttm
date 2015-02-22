@@ -36,3 +36,8 @@ products:
         ean:  6
         name: 33
         description: 111 111 111
+
+user_accounts:
+    - !!models.UserAccount
+        email:  alice@example.com
+        password: alice
