@@ -16,6 +16,7 @@
                 <li><a href="@routes.Application.login()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             } else {
                 <li><a href="">@session.get("email")</a></li>
+                <li><a href="@routes.Application.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             }
             </ul>
         </div>

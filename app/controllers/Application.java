@@ -30,6 +30,11 @@ public class Application extends Controller {
         return redirect(routes.Products.list(0));
     }
 
+    public static Result logout() {
+        session().clear();
+        return redirect(routes.Application.index());
+    }
+
     public static class Login {
         public String email;
         public String password;
