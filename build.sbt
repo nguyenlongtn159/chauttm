@@ -8,5 +8,6 @@ playJavaSettings
 
 libraryDependencies ++= Seq (
   javaEbean,
-  "org.postgresql" % "postgresql" % "9.3-1100-jdbc41"
-)
+  "org.postgresql" % "postgresql" % "9.3-1100-jdbc41",
+  filters
+  )

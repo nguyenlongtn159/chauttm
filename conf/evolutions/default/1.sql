@@ -37,6 +37,13 @@ create table tag (
   constraint pk_tag primary key (id))
 ;
 
+create table user_account (
+  id                        bigint not null,
+  email                     varchar(255),
+  password                  varchar(255),
+  constraint pk_user_account primary key (id))
+;
+
 create table warehouse (
   id                        bigint not null,
   name                      varchar(255),
@@ -57,6 +64,8 @@ create sequence product_seq;
 create sequence stock_item_seq;
 
 create sequence tag_seq;
+
+create sequence user_account_seq;
 
 create sequence warehouse_seq;
 
@@ -85,6 +94,8 @@ drop table if exists stock_item cascade;
 
 drop table if exists tag cascade;
 
+drop table if exists user_account cascade;
+
 drop table if exists warehouse cascade;
 
 drop sequence if exists address_seq;
@@ -94,6 +105,8 @@ drop sequence if exists product_seq;
 drop sequence if exists stock_item_seq;
 
 drop sequence if exists tag_seq;
+
+drop sequence if exists user_account_seq;
 
 drop sequence if exists warehouse_seq;
 

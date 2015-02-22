@@ -1,6 +1,8 @@
 import com.avaje.ebean.Ebean;
 import play.*;
 import models.*;
+import play.api.mvc.EssentialFilter;
+import play.filters.csrf.CSRFFilter;
 import play.libs.Yaml;
 import java.util.List;
 import java.util.Map;
@@ -28,5 +30,9 @@ public class Global extends GlobalSettings {
 
     public void onStop(Application app) {
         Logger.info("Application shutdown...");
+    }
+
+    public <T extends EssentialFilter> Class<T>[] filters() {
+        return new Class[]{CSRFFilter.class};
     }
 }

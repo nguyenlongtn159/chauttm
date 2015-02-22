@@ -5,6 +5,9 @@
 # Home page
 GET           /                     controllers.Application.index
 
+GET           /login                controllers.Application.login()
+POST          /authenticate         controllers.Application.authenticate()
+
 # Map static resources from the /public folder to the /assets URL path
 GET           /assets/*file         controllers.Assets.at(path="/public", file)
 
@@ -14,4 +17,4 @@ GET           /products/:ean        controllers.Products.details(ean: models.Pro
 POST          /products/            controllers.Products.save()
 DELETE        /products/:ean        controllers.Products.delete(ean: String)
 
-GET  /stockitems/           controllers.StockItems.index()
+GET           /stockitems/          controllers.StockItems.index()

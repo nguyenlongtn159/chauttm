@@ -7,13 +7,14 @@ import models.Tag;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.products.details;
 import views.html.products.list;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Security.Authenticated(Secured.class)
 public class Products extends Controller {
 
     private static final Form<Product> productForm = Form.form(Product.class);
