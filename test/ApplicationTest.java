@@ -6,6 +6,7 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.*;
 
+import org.mockito.Mockito;
 import play.mvc.*;
 import play.test.*;
 import play.data.DynamicForm;
@@ -35,6 +36,13 @@ public class ApplicationTest {
 
     @Test
     public void renderTemplate() {
+        //setup HTTP Context
+        Http.Context context = Mockito.mock(Http.Context.class);
+        //mocking flash session, request, etc... as required
+        Http.Flash flash = Mockito.mock(Http.Flash.class);
+        Mockito.when(context.flash()).thenReturn(flash);
+        Http.Context.current.set(context);
+
         Content html = views.html.index.render("Your new application is ready.");
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("Your new application is ready.");

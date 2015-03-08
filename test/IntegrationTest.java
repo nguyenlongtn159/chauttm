@@ -1,3 +1,5 @@
+import com.avaje.ebean.Page;
+import models.Product;
 import org.junit.*;
 
 import play.mvc.*;
@@ -25,4 +27,23 @@ public class IntegrationTest {
         });
     }
 
+    @Test
+    public void findByEan() {
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Product product = Product.findByEan("1");
+                assertThat(product.name).isEqualTo("11");
+            }
+        });}
+
+    @Test
+    public void pagination() {
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Page<Product> products = Product.find(0);
+                assertThat(products.getTotalRowCount()).isEqualTo(6);
+                assertThat(products.getList().size()).isEqualTo(5);
+            }
+        });
+    }
 }
